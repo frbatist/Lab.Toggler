@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Toggler", "Lab.Toggler\Lab.Toggler.csproj", "{76ABB890-DBD5-47C8-BEFF-32314EA6AC90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Toggler.Identity", "Lab.Toggler.Identity\Lab.Toggler.Identity.csproj", "{4118B4FD-D5C0-4190-AC8C-82625BB83592}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76ABB890-DBD5-47C8-BEFF-32314EA6AC90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76ABB890-DBD5-47C8-BEFF-32314EA6AC90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76ABB890-DBD5-47C8-BEFF-32314EA6AC90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76ABB890-DBD5-47C8-BEFF-32314EA6AC90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4118B4FD-D5C0-4190-AC8C-82625BB83592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4118B4FD-D5C0-4190-AC8C-82625BB83592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4118B4FD-D5C0-4190-AC8C-82625BB83592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4118B4FD-D5C0-4190-AC8C-82625BB83592}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5356C242-E407-461F-863B-79F77D7A0880}
+	EndGlobalSection
+EndGlobal
