@@ -14,4 +14,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lab.Toggler.Domain\Lab.Toggler.Domain.csproj" />
+    <ProjectReference Include="..\Lab.Toggler.Infra\Lab.Toggler.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
