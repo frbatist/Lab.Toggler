@@ -8,7 +8,7 @@ namespace Lab.Toggler.Domain.Interface.Entity
     /// Entity for persistence
     /// </summary>
     /// <typeparam name="T">Type of the identity property</typeparam>
-    public interface IEntity<T>
+    public interface IEntity<T> : IEntity
     {
         T Id { get; set; }
     }
