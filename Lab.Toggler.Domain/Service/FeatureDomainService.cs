@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using MediatR;
 
 namespace Lab.Toggler.Domain.Service
@@ -11,6 +12,6 @@ namespace Lab.Toggler.Domain.Service
         {
         }
 
-
+        //public async Task AddFeature
     }
 }
