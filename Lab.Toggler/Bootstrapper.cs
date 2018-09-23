@@ -1,11 +1,9 @@
 ﻿using Lab.Toggler.Domain.Interface.Data;
+using Lab.Toggler.Domain.Service;
 using Lab.Toggler.Infra.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lab.Toggler
 {
@@ -16,6 +14,7 @@ namespace Lab.Toggler
             //Infra
             services.AddScoped<DbContext, TogglerContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<INotificationHandler<ErrorNotification>, ErrorNotificationHandler>();
 
             return services;
         }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Toggler.Domain", "Lab.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Toggler.Infra", "Lab.Toggler.Infra\Lab.Toggler.Infra.csproj", "{897AFF93-5130-41C0-A901-DE10393AC9D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Toggler.Tests", "Lab.Toggler.Tests\Lab.Toggler.Tests.csproj", "{E368F284-77D4-439F-B9AD-48C41401B63F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{897AFF93-5130-41C0-A901-DE10393AC9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{897AFF93-5130-41C0-A901-DE10393AC9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{897AFF93-5130-41C0-A901-DE10393AC9D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E368F284-77D4-439F-B9AD-48C41401B63F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E368F284-77D4-439F-B9AD-48C41401B63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E368F284-77D4-439F-B9AD-48C41401B63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E368F284-77D4-439F-B9AD-48C41401B63F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

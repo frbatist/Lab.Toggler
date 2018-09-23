@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace Lab.Toggler
 {
@@ -21,6 +22,7 @@ namespace Lab.Toggler
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TogglerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddMediatR(typeof(Startup));
             services.RegisterServices();
 
             services.AddMvcCore()

@@ -13,6 +13,11 @@ namespace Lab.Toggler.Infra.Data
     {
         private DbContext _context;
 
+        public EntityFrameworkRepository(DbContext context)
+        {
+            _context = context;
+        }
+
         public void Add(TEntity entity)
         {
             _context.Add(entity);
