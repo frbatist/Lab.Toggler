@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Lab.Toggler.Infra.Data.Mapping;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lab.Toggler.Infra.Data
 {
@@ -26,6 +24,7 @@ namespace Lab.Toggler.Infra.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new FeatureMapping());
             base.OnModelCreating(builder);
         }
     }

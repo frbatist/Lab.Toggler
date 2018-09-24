@@ -20,5 +20,10 @@ namespace Lab.Toggler.Domain.Service
                 await _mediator.Publish(new ErrorNotification(error.ErrorMessage));
             }
         }
+
+        protected async Task NotifyError(string error)
+        {
+            await _mediator.Publish(new ErrorNotification(error));
+        }
     }
 }

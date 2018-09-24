@@ -68,5 +68,14 @@ namespace Lab.Toggler.Domain.Resources {
                 return ResourceManager.GetString("FeatureNameCannotBeNulllOrEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nonexisting Feature.
+        /// </summary>
+        public static string NonExistentFeature {
+            get {
+                return ResourceManager.GetString("NonExistentFeature", resourceCulture);
+            }
+        }
     }
 }

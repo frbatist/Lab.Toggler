@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Lab.Toggler.Domain\Lab.Toggler.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Mapping\" />
-  </ItemGroup>
-
 </Project>

@@ -120,4 +120,7 @@
   <data name="FeatureNameCannotBeNulllOrEmpty" xml:space="preserve">
     <value>Feature name cannot be null or empty.</value>
   </data>
+  <data name="NonExistentFeature" xml:space="preserve">
+    <value>Nonexisting Feature</value>
+  </data>
 </root>
