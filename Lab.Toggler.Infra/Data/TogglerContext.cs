@@ -25,6 +25,8 @@ namespace Lab.Toggler.Infra.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new FeatureMapping());
+            builder.ApplyConfiguration(new ApplicationMapping());
+            builder.ApplyConfiguration(new ApplicationFeatureMapping());
             base.OnModelCreating(builder);
         }
     }
