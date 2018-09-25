@@ -98,5 +98,33 @@ namespace Lab.Toggler.Tests.Integration
                 persistedEntity.IsActive.Should().Be(true);
             }
         }
+
+        [Fact]
+        public async Task Should_get_application_feature_by_application_name_version_and_feature_name()
+        {
+            var feature = new Feature("Feature01", false);
+            var application1 = new Application("Sales", "1.1");
+            var applicationFeature1 = new ApplicationFeature(feature, application1, false);
+            var application2 = new Application("Sales", "1.2");
+            var applicationFeature2 = new ApplicationFeature(feature, application2, true);
+            var application3 = new Application("Sales", "1.3");
+            var applicationFeature3 = new ApplicationFeature(feature, application3, false);
+
+            await AddEntity(feature, application1, application2, application3, applicationFeature1, applicationFeature2, applicationFeature3);
+
+            var persistedEntity = await ExecuteCommand((contexto) =>
+            {
+                var featureRepository = new ApplicationFeatureRepository(contexto);
+                return featureRepository.GetAsync(application2.Name, application2.Version, feature.Name);
+            });
+
+            using (new AssertionScope())
+            {
+                persistedEntity.Should().NotBeNull();
+                persistedEntity.ApplicationId.Should().Be(application2.Id);
+                persistedEntity.FeatureId.Should().Be(feature.Id);
+                persistedEntity.IsActive.Should().Be(true);
+            }
+        }
     }
 }

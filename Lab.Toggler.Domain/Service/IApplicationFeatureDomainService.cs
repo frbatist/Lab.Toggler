@@ -8,5 +8,6 @@ namespace Lab.Toggler.Domain.Service
     {
         Task<ApplicationFeature> Add(ApplicationFeatureDTO applicationFeatureDTO);
         Task TogleApplicationFeature(ApplicationFeatureDTO applicationFeatureDTO);
+        Task<FeatureCheckDTO> CheckFeature(string application, string version, string featureName);
     }
 }

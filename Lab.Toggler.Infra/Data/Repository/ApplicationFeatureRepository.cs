@@ -23,5 +23,11 @@ namespace Lab.Toggler.Infra.Data.Repository
             var query = GetAll(d => d.Application, f => f.Feature).Where(d => d.Id.Equals(id));
             return query.FirstOrDefaultAsync();
         }
+
+        public Task<ApplicationFeature> GetAsync(string application, string version, string featureName)
+        {
+            var query = GetAll().Where(d=>d.Application.Name.Equals(application) && d.Application.Version.Equals(version) && d.Feature.Name.Equals(featureName));
+            return query.FirstOrDefaultAsync();
+        }
     }
 }

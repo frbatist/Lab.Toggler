@@ -10,10 +10,12 @@ namespace Lab.Toggler.Domain.Service
     public class ApplicationFeatureDomainService : ServiceBase, IApplicationFeatureDomainService
     {
         private readonly IApplicationFeatureRepository _applicationFeatureRepository;
+        private readonly IFeatureRepository _featureRepository;
 
-        public ApplicationFeatureDomainService(IMediator mediator, IApplicationFeatureRepository applicationFeatureRepository) : base(mediator)
+        public ApplicationFeatureDomainService(IMediator mediator, IApplicationFeatureRepository applicationFeatureRepository, IFeatureRepository featureRepository) : base(mediator)
         {
             _applicationFeatureRepository = applicationFeatureRepository;
+            _featureRepository = featureRepository;
         }
 
         public async Task<ApplicationFeature> Add(ApplicationFeatureDTO applicationFeatureDTO)
@@ -56,6 +58,65 @@ namespace Lab.Toggler.Domain.Service
             else
                 existingFeature.Disable();
             return existingFeature;
+        }
+
+        public async Task<FeatureCheckDTO> CheckFeature(string application, string version, string featureName)
+        {
+            var featureCheck = await CheckApplicationFeature(application, version, featureName);
+
+            if (featureCheck != null)
+                return featureCheck;
+
+            return await CheckGlobalFeature(featureName);
+        }
+
+        private async Task<FeatureCheckDTO> CheckGlobalFeature(string featureName)
+        {
+            var feature = await _featureRepository.GetByName(featureName);
+            if (feature == null || feature.IsActive)
+            {
+                return new FeatureCheckDTO
+                {
+                    Enabled = true,
+                    Mesage = DomainMessage.FeatureEnabled
+                };
+            }
+            else
+            {
+                return new FeatureCheckDTO
+                {
+                    Enabled = false,
+                    Mesage = DomainMessage.FeatureDisabled
+                };
+            }
+        }
+
+        private async Task<FeatureCheckDTO> CheckApplicationFeature(string application, string version, string featureName)
+        {
+            var applicationFeature = await _applicationFeatureRepository.GetAsync(application, version, featureName);
+            if (applicationFeature == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (applicationFeature.IsActive)
+                {
+                    return new FeatureCheckDTO
+                    {
+                        Enabled = true,
+                        Mesage = DomainMessage.FeatureEnabled
+                    };
+                }
+                else
+                {
+                    return new FeatureCheckDTO
+                    {
+                        Enabled = false,
+                        Mesage = DomainMessage.FeatureDisabled
+                    };
+                }
+            }
         }
     }
 }

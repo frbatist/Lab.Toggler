@@ -8,9 +8,7 @@ using Lab.Toggler.Domain.Service;
 using MediatR;
 using NSubstitute;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,13 +18,15 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
     {
         private readonly IMediator _mediator;
         private readonly IApplicationFeatureRepository _applicationFeatureRepository;
+        private readonly IFeatureRepository _featureRepository;
         private readonly IApplicationFeatureDomainService _applicationFeatureDomainService;        
 
         public ApplicationFeatureDomainServiceTest()
         {
             _mediator = Substitute.For<IMediator>();
             _applicationFeatureRepository = Substitute.For<IApplicationFeatureRepository>();
-            _applicationFeatureDomainService = new ApplicationFeatureDomainService(_mediator, _applicationFeatureRepository);
+            _featureRepository = Substitute.For<IFeatureRepository>();
+            _applicationFeatureDomainService = new ApplicationFeatureDomainService(_mediator, _applicationFeatureRepository, _featureRepository);
         }
 
         [Fact]
@@ -163,6 +163,60 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
             await _applicationFeatureDomainService.TogleApplicationFeature(dto);
 
             await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.NonExistentFeature)));
+        }
+
+        [Fact]
+        public async Task Should_return_true_if_feature_is_eanabled_for_all_apps()
+        {
+            var feature = new Feature("isBlueButtonActive", true);
+            _featureRepository.GetByName("isBlueButtonActive").Returns(feature);
+            var result = await _applicationFeatureDomainService.CheckFeature("app01", "1.1", "isBlueButtonActive");
+
+            result.Should().NotBeNull();
+            result.Enabled.Should().BeTrue();
+            result.Mesage.Should().Be(DomainMessage.FeatureEnabled);
+        }
+
+        [Fact]
+        public async Task Should_return_false_if_feature_is_disabled_for_all_apps()
+        {
+            var feature = new Feature("isBlueButtonActive", false);
+            _featureRepository.GetByName("isBlueButtonActive").Returns(feature);
+            var result = await _applicationFeatureDomainService.CheckFeature("app01", "1.1", "isBlueButtonActive");
+
+            result.Should().NotBeNull();
+            result.Enabled.Should().BeFalse();
+            result.Mesage.Should().Be(DomainMessage.FeatureDisabled);
+        }
+
+        [Fact]
+        public async Task Should_return_true_if_feature_is_enabled_for_the_app()
+        {
+            var application = new Application("App01", "0.1");
+            var feature = new Feature("isBlueButtonActive", false);
+            var applicationFeature = new ApplicationFeature(feature, application, true);
+
+            _applicationFeatureRepository.GetAsync("App01", "0.1", "isBlueButtonActive").Returns(applicationFeature);
+            var result = await _applicationFeatureDomainService.CheckFeature("App01", "0.1", "isBlueButtonActive");
+
+            result.Should().NotBeNull();
+            result.Enabled.Should().BeTrue();
+            result.Mesage.Should().Be(DomainMessage.FeatureEnabled);
+        }
+
+        [Fact]
+        public async Task Should_return_true_if_feature_is_disabled_for_the_app()
+        {
+            var application = new Application("App01", "0.1");
+            var feature = new Feature("isBlueButtonActive", true);
+            var applicationFeature = new ApplicationFeature(feature, application, false);
+
+            _applicationFeatureRepository.GetAsync("App01", "0.1", "isBlueButtonActive").Returns(applicationFeature);
+            var result = await _applicationFeatureDomainService.CheckFeature("App01", "0.1", "isBlueButtonActive");
+
+            result.Should().NotBeNull();
+            result.Enabled.Should().BeFalse();
+            result.Mesage.Should().Be(DomainMessage.FeatureDisabled);
         }
     }
 }

@@ -10,7 +10,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\DomainMessageError.Designer.cs">
+    <Compile Update="Resources\DomainMessage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DomainMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\DomainMessageError - Copy.Designer.cs">
+      <DependentUpon>DomainMessageError.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\DomainMessageError - Copy.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DomainMessageError.resx</DependentUpon>
@@ -18,9 +28,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\DomainMessage.resx">
+      <LastGenOutput>DomainMessage.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\DomainMessageError.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DomainMessageError.Designer.cs</LastGenOutput>
+      <LastGenOutput>DomainMessageError - Copy.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

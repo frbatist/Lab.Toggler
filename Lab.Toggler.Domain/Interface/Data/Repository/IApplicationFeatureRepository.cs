@@ -6,6 +6,7 @@ namespace Lab.Toggler.Domain.Interface.Data.Repository
     public interface IApplicationFeatureRepository : IRepository<ApplicationFeature>
     {
         Task<ApplicationFeature> GetAsync(int applicationId, int featureId);
+        Task<ApplicationFeature> GetAsync(string application, string version, string featureName);
         Task<ApplicationFeature> GetApplicationFeatureAsync(int id);
     }
 }
