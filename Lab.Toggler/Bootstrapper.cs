@@ -21,11 +21,11 @@ namespace Lab.Toggler
             //repository
             services.AddScoped<IFeatureRepository, FeatureRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
-            services.AddScoped<IApplicationFeatureRepository, ApplicationFeatureRepository>();
-            services.AddScoped<IApplicationFeatureRepository, ApplicationFeatureRepository>();   
+            services.AddScoped<IApplicationFeatureRepository, ApplicationFeatureRepository>();  
 
             //domain services
             services.AddScoped<IFeatureDomainService, FeatureDomainService>();
+            services.AddScoped<IApplicationDomainService, ApplicationDomainService>();
 
 
             return services;

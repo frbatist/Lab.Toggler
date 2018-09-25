@@ -61,6 +61,33 @@ namespace Lab.Toggler.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ApplicationAlreadyExists.
+        /// </summary>
+        public static string ApplicationAlreadyExists {
+            get {
+                return ResourceManager.GetString("ApplicationAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application name cannot be null or empty..
+        /// </summary>
+        public static string ApplicationNameCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ApplicationNameCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application version cannot be null or empty..
+        /// </summary>
+        public static string ApplicationVersionCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ApplicationVersionCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature name cannot be null or empty..
         /// </summary>
         public static string FeatureNameCannotBeNulllOrEmpty {
@@ -70,7 +97,7 @@ namespace Lab.Toggler.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nonexisting Feature.
+        ///   Looks up a localized string similar to Nonexisting Feature..
         /// </summary>
         public static string NonExistentFeature {
             get {
