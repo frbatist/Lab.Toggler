@@ -53,6 +53,7 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 dto.ValidationResult.Errors.Should().NotBeEmpty();
                 _featureRepository.Received(0).Add(feature);
                 dto.ValidationResult.Errors.Select(d => d.ErrorMessage).ToArray().Contains(DomainMessageError.FeatureNameCannotBeNulllOrEmpty);
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.FeatureNameCannotBeNulllOrEmpty)));
             }
         }
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -15,12 +15,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DomainMessage.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\DomainMessageError - Copy.Designer.cs">
-      <DependentUpon>DomainMessageError.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\DomainMessageError - Copy.Designer.cs">
+    <Compile Update="Resources\DomainMessageError.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DomainMessageError.resx</DependentUpon>
@@ -34,7 +29,7 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\DomainMessageError.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DomainMessageError - Copy.Designer.cs</LastGenOutput>
+      <LastGenOutput>DomainMessageError.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

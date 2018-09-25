@@ -1,7 +1,4 @@
 ﻿using Lab.Toggler.Domain.Validation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Lab.Toggler.Domain.DTO
 {
