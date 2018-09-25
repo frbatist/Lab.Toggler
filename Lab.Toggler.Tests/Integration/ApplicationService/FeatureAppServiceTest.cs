@@ -9,9 +9,6 @@ using Lab.Toggler.Infra.Data.Repository;
 using Lab.Toggler.Model;
 using MediatR;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
