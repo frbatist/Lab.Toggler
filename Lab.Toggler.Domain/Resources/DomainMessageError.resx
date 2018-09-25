@@ -120,11 +120,17 @@
   <data name="ApplicationAlreadyExists" xml:space="preserve">
     <value>ApplicationAlreadyExists</value>
   </data>
+  <data name="ApplicationCannotBeNull" xml:space="preserve">
+    <value>Application cannot be null.</value>
+  </data>
   <data name="ApplicationNameCannotBeNullOrEmpty" xml:space="preserve">
     <value>Application name cannot be null or empty.</value>
   </data>
   <data name="ApplicationVersionCannotBeNullOrEmpty" xml:space="preserve">
     <value>Application version cannot be null or empty.</value>
+  </data>
+  <data name="FeatureCannotBeNull" xml:space="preserve">
+    <value>Feature cannot be null.</value>
   </data>
   <data name="FeatureNameCannotBeNulllOrEmpty" xml:space="preserve">
     <value>Feature name cannot be null or empty.</value>

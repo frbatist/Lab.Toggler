@@ -70,6 +70,15 @@ namespace Lab.Toggler.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application cannot be null..
+        /// </summary>
+        public static string ApplicationCannotBeNull {
+            get {
+                return ResourceManager.GetString("ApplicationCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application name cannot be null or empty..
         /// </summary>
         public static string ApplicationNameCannotBeNullOrEmpty {
@@ -84,6 +93,15 @@ namespace Lab.Toggler.Domain.Resources {
         public static string ApplicationVersionCannotBeNullOrEmpty {
             get {
                 return ResourceManager.GetString("ApplicationVersionCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feature cannot be null..
+        /// </summary>
+        public static string FeatureCannotBeNull {
+            get {
+                return ResourceManager.GetString("FeatureCannotBeNull", resourceCulture);
             }
         }
         

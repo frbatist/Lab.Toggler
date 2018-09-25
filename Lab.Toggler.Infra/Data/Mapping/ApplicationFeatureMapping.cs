@@ -8,7 +8,9 @@ namespace Lab.Toggler.Infra.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<ApplicationFeature> builder)
         {
-            builder.HasIndex(d => new { d.Application, d.Feature }).IsUnique();
+            builder.HasOne(d => d.Application).WithMany().HasForeignKey(d => d.ApplicationId);
+            builder.HasOne(d => d.Feature).WithMany().HasForeignKey(d => d.FeatureId);
+            builder.HasIndex(d => new { d.ApplicationId, d.FeatureId }).IsUnique();
         }
     }
 }

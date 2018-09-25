@@ -5,9 +5,16 @@ namespace Lab.Toggler.Domain.Entities
     public class ApplicationFeature : IEntity<int>
     {
         public int Id { get; set; }
-        public Feature Feature { get; set; }
-        public Application Application { get; set; }
+        public Feature Feature { get; protected set; }
+        public int FeatureId { get; protected set; }
+        public Application Application { get; protected set; }
+        public int ApplicationId { get; set; }
         public bool IsActive { get; protected set; }
+
+        protected ApplicationFeature()
+        {
+
+        }
 
         public ApplicationFeature(Feature feature, Application application, bool isActive)
         {

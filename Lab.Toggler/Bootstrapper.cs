@@ -26,7 +26,7 @@ namespace Lab.Toggler
             //domain services
             services.AddScoped<IFeatureDomainService, FeatureDomainService>();
             services.AddScoped<IApplicationDomainService, ApplicationDomainService>();
-
+            services.AddScoped<IApplicationFeatureDomainService, ApplicationFeatureDomainService>();
 
             return services;
         }
