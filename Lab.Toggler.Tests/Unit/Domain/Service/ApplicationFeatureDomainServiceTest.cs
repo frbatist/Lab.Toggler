@@ -63,6 +63,7 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 _applicationFeatureRepository.Received(0).Add(appFeature);
                 dto.ValidationResult.Errors.Should().NotBeEmpty();
                 dto.ValidationResult.Errors.Any(d => d.ErrorMessage == DomainMessageError.ApplicationCannotBeNull);
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.ApplicationCannotBeNull)));
             }
         }
 
@@ -80,6 +81,7 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 _applicationFeatureRepository.Received(0).Add(appFeature);
                 dto.ValidationResult.Errors.Should().NotBeEmpty();
                 dto.ValidationResult.Errors.Any(d => d.ErrorMessage == DomainMessageError.FeatureCannotBeNull);
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.FeatureCannotBeNull)));
             }
         }
 
@@ -97,6 +99,8 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 _applicationFeatureRepository.Received(0).Add(appFeature);
                 dto.ValidationResult.Errors.Should().HaveCount(2);
                 dto.ValidationResult.Errors.Any(d => errorMessages.Contains(d.ErrorMessage));
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.ApplicationCannotBeNull)));
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.FeatureCannotBeNull)));
             }
         }
 
