@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lab.Toggler.Domain\Lab.Toggler.Domain.csproj" />
     <ProjectReference Include="..\Lab.Toggler.Infra\Lab.Toggler.Infra.csproj" />
+    <ProjectReference Include="..\Lab.Toggler\Lab.Toggler.csproj" />
   </ItemGroup>
 
 </Project>

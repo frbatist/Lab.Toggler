@@ -20,6 +20,7 @@ namespace Lab.Toggler.Domain.Service
         {
             if (!dto.IsValid())
             {
+                await NotifyValidationErrors(dto);
                 return null;
             }
 

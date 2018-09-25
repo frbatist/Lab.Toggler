@@ -84,6 +84,7 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 dto.ValidationResult.Errors.Should().NotBeEmpty();
                 _applicationRepository.Received(0).Add(newApplication);
                 dto.ValidationResult.Errors.Any(d => d.ErrorMessage == DomainMessageError.ApplicationNameCannotBeNullOrEmpty);
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.ApplicationNameCannotBeNullOrEmpty)));
             }
         }
 
@@ -103,6 +104,7 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 dto.ValidationResult.Errors.Should().NotBeEmpty();
                 _applicationRepository.Received(0).Add(newApplication);
                 dto.ValidationResult.Errors.Any(d => d.ErrorMessage == DomainMessageError.ApplicationVersionCannotBeNullOrEmpty);
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.ApplicationVersionCannotBeNullOrEmpty)));
             }
         }
 
@@ -123,6 +125,8 @@ namespace Lab.Toggler.Tests.Unit.Domain.Service
                 dto.ValidationResult.Errors.Should().HaveCount(2);
                 _applicationRepository.Received(0).Add(newApplication);
                 dto.ValidationResult.Errors.Any(d => errorMessages.Contains(d.ErrorMessage));
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.ApplicationNameCannotBeNullOrEmpty)));
+                await _mediator.Received(1).Publish(Arg.Is<ErrorNotification>(d => d.Error.Equals(DomainMessageError.ApplicationVersionCannotBeNullOrEmpty)));
             }
         }
     }

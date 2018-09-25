@@ -7,6 +7,17 @@ namespace Lab.Toggler.Domain.DTO
         public string Name { get; set; }
         public string Version { get; set; }
 
+        public ApplicationDTO()
+        {
+
+        }
+
+        public ApplicationDTO(string name, string version)
+        {
+            Name = name;
+            Version = version;
+        }
+
         public override bool IsValid()
         {
             ValidationResult = new ApplicationDtoValidation().Validate(this);

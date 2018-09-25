@@ -1,9 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using Lab.Toggler.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Lab.Toggler.Tests.Unit.Domain.Entity
