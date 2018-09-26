@@ -3,12 +3,14 @@ using System.Threading.Tasks;
 using Lab.Toggler.ApplicationService;
 using Lab.Toggler.Domain.Interface.Notifications;
 using Lab.Toggler.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lab.Toggler.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ApplicationFeatureController : ApiControllerBase
     {
         private readonly IFeatureAppService _featureAppService;
@@ -25,6 +27,7 @@ namespace Lab.Toggler.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(ApplicationFeatureResponseModel), 200)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Post(ApplicationFeatureModel model)
         {
             try
@@ -45,6 +48,7 @@ namespace Lab.Toggler.Controllers
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(200)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Put(ApplicationFeatureModel model)
         {
             try
@@ -58,9 +62,14 @@ namespace Lab.Toggler.Controllers
             }
         }
 
+        /// <summary>
+        /// Endpoint to get feature data, shows if it's enabled or disabled
+        /// </summary>
+        /// <param name="featureCheckModel">Application feature data</param>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(FeatureCheckModelResponse), 200)]
-        public async Task<IActionResult> Get(FeatureCheckModel featureCheckModel)
+        public async Task<IActionResult> Get([FromQuery]FeatureCheckModel featureCheckModel)
         {
             try
             {

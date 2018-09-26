@@ -1,4 +1,5 @@
-﻿using Lab.Toggler.Domain.Interface.Data;
+﻿using Lab.Toggler.ApplicationService;
+using Lab.Toggler.Domain.Interface.Data;
 using Lab.Toggler.Domain.Interface.Data.Repository;
 using Lab.Toggler.Domain.Interface.Notifications;
 using Lab.Toggler.Domain.Service;
@@ -30,6 +31,10 @@ namespace Lab.Toggler
             services.AddScoped<IFeatureDomainService, FeatureDomainService>();
             services.AddScoped<IApplicationDomainService, ApplicationDomainService>();
             services.AddScoped<IApplicationFeatureDomainService, ApplicationFeatureDomainService>();
+
+            //application services
+            services.AddScoped<IApplicationAppService, ApplicationAppService>();
+            services.AddScoped<IFeatureAppService, FeatureAppService>();
 
             return services;
         }

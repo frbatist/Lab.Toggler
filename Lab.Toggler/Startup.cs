@@ -77,6 +77,8 @@ namespace Lab.Toggler
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
