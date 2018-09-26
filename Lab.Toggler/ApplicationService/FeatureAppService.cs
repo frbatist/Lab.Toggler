@@ -1,6 +1,7 @@
 ﻿using Lab.Toggler.Domain.DTO;
 using Lab.Toggler.Domain.Interface.Data;
 using Lab.Toggler.Domain.Interface.Data.Repository;
+using Lab.Toggler.Domain.Interface.MessageBus;
 using Lab.Toggler.Domain.Service;
 using Lab.Toggler.Model;
 using System.Threading.Tasks;

@@ -27,4 +27,10 @@
     <ProjectReference Include="..\Lab.Toggler.Infra\Lab.Toggler.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="rawrabbit.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -1,8 +1,10 @@
 ﻿using Lab.Toggler.ApplicationService;
 using Lab.Toggler.Domain.Interface.Data;
 using Lab.Toggler.Domain.Interface.Data.Repository;
+using Lab.Toggler.Domain.Interface.MessageBus;
 using Lab.Toggler.Domain.Interface.Notifications;
 using Lab.Toggler.Domain.Service;
+using Lab.Toggler.Infra.Bus;
 using Lab.Toggler.Infra.Data;
 using Lab.Toggler.Infra.Data.Repository;
 using Lab.Toggler.Infra.Notifications;
@@ -21,6 +23,7 @@ namespace Lab.Toggler
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<INotificationHandler<ErrorNotification>, ErrorNotificationHandler>();
             services.AddScoped<IErrorNotificationsManager, ErrorNotificationManager>();
+            services.AddScoped<IMessageBus, RabbitMqMessageBus>();
 
             //repository
             services.AddScoped<IFeatureRepository, FeatureRepository>();

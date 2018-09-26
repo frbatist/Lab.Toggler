@@ -10,6 +10,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
 using System.IO;
 using System;
+using Lab.Toggler.Infra.Bus;
 
 namespace Lab.Toggler
 {
@@ -62,6 +63,8 @@ namespace Lab.Toggler
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddRabbitMQ();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
