@@ -8,18 +8,18 @@ namespace Lab.Toggler.Controllers
     [ApiController]    
     public class ToggleController : ControllerBase
     {
-        [Authorize(Roles = "admin")]
-        public IActionResult Get()
-        {
-            return Ok(User.Claims.Where(d=>d.Type.Equals("client_id")).FirstOrDefault().Value);
-        }
+        //[Authorize(Roles = "admin")]
+        //public IActionResult Get()
+        //{
+        //    return Ok(User.Claims.Where(d=>d.Type.Equals("client_id")).FirstOrDefault().Value);
+        //}
 
-        [Authorize]
-        [HttpGet]
-        [Route("not-admin")]
-        public IActionResult NotAdmin()
-        {
-            return Ok(User.Claims.Where(d => d.Type.Equals("client_id")).FirstOrDefault().Value);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Route("not-admin")]
+        //public IActionResult NotAdmin()
+        //{
+        //    return Ok(User.Claims.Where(d => d.Type.Equals("client_id")).FirstOrDefault().Value);
+        //}
     }
 }

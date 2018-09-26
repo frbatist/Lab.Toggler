@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lab.Toggler</name>
+    </assembly>
+    <members>
+        <member name="T:Lab.Toggler.Controllers.ApplicationController">
+            <summary>
+            Application API, provides endpoints for application management
+            </summary>
+        </member>
+        <member name="M:Lab.Toggler.Controllers.ApplicationController.Post(Lab.Toggler.Model.ApplicationModel)">
+            <summary>
+            Endpoint to add a new application for feature management
+            </summary>
+            <param name="model">Application data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lab.Toggler.Controllers.ApplicationFeatureController.Post(Lab.Toggler.Model.ApplicationFeatureModel)">
+            <summary>
+            Endpoint to add a new new application feature
+            </summary>
+            <param name="model">Application feature data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lab.Toggler.Controllers.ApplicationFeatureController.Put(Lab.Toggler.Model.ApplicationFeatureModel)">
+            <summary>
+            Endpoint to alter application feature data
+            </summary>
+            <param name="model">Application feature data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lab.Toggler.Controllers.FeatureController.Post(Lab.Toggler.Model.FeatureModel)">
+            <summary>
+            Endpoint to add a new new feature
+            </summary>
+            <param name="model">Feature data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lab.Toggler.Controllers.FeatureController.Put(Lab.Toggler.Model.FeatureModel)">
+            <summary>
+            Endpoint to alter feature data
+            </summary>
+            <param name="model">Application data</param>
+            <returns></returns>
+        </member>
+        <member name="T:Lab.Toggler.Model.ApplicationFeatureModel">
+            <summary>
+            Application feature
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureModel.ApplicationName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureModel.ApplicationVersion">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureModel.FeatureName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureModel.IsActive">
+            <summary>
+            Indicate if it's active
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.ApplicationFeatureResponseModel">
+            <summary>
+            Application Feature
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureResponseModel.Id">
+            <summary>
+            Application feature Id
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureResponseModel.ApplicationName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureResponseModel.ApplicationVersion">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureResponseModel.FeatureName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationFeatureResponseModel.IsActive">
+            <summary>
+            Indicates if it's active
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.ApplicationModel">
+            <summary>
+            Application
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationModel.Name">
+            <summary>
+            Application name 
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationModel.Version">
+            <summary>
+            Application version
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.ApplicationResponseModel">
+            <summary>
+            Application
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationResponseModel.Id">
+            <summary>
+            Application Id
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationResponseModel.Name">
+            <summary>
+            Application Name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.ApplicationResponseModel.Version">
+            <summary>
+            Application Version
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.FeatureCheckModel">
+            <summary>
+            Feature check data
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureCheckModel.ApplicationName">
+            <summary>
+            Application name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureCheckModel.ApplicationVersion">
+            <summary>
+            Application version
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureCheckModel.Feature">
+            <summary>
+            Feature name
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.FeatureCheckModelResponse">
+            <summary>
+            Feature is enabled or disabled
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureCheckModelResponse.Enabled">
+            <summary>
+            Indicates if feature is enabled
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.FeatureModel">
+            <summary>
+            Feature
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureModel.Name">
+            <summary>
+            Feature name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureModel.IsActive">
+            <summary>
+            Feature is active
+            </summary>
+        </member>
+        <member name="T:Lab.Toggler.Model.FeatureModelResponse">
+            <summary>
+            Feature
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureModelResponse.Id">
+            <summary>
+            Feature Id
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureModelResponse.Name">
+            <summary>
+            Feature name
+            </summary>
+        </member>
+        <member name="P:Lab.Toggler.Model.FeatureModelResponse.IsActive">
+            <summary>
+            Indicates if feature is active
+            </summary>
+        </member>
+    </members>
+</doc>

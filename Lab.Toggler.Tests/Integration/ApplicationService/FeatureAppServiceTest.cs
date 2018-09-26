@@ -33,10 +33,122 @@ namespace Lab.Toggler.Tests.Integration.ApplicationService
                 return featureAppService.Add(new FeatureModel { Name = "isButtonGreen", IsActive = true });
             });
 
+            var persistedEntity = await ExecuteCommand((contexto) =>
+            {
+                var featureRepository = new FeatureRepository(contexto);
+                return featureRepository.GetAsync(newFeature.Id);
+            });
+
             using (new AssertionScope())
             {
+                persistedEntity.Should().NotBeNull();
                 newFeature.Name.Should().Be("isButtonGreen");
                 newFeature.IsActive.Should().BeTrue();
+            }
+        }
+
+        [Fact]
+        public async Task Should_toggle_feature()
+        {
+            var feature = new Feature("isButtonGreen", false);
+            await AddEntity(feature);
+
+            await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.ToggleFeature(new FeatureModel { Name = "isButtonGreen", IsActive = true });
+            });
+
+            var persistedEntity = await ExecuteCommand((contexto) =>
+            {
+                var featureRepository = new FeatureRepository(contexto);
+                return featureRepository.GetAsync(feature.Id);
+            });
+
+            using (new AssertionScope())
+            {
+                persistedEntity.Name.Should().Be("isButtonGreen");
+                persistedEntity.IsActive.Should().BeTrue();
+            }
+        }
+
+        [Fact]
+        public async Task Should_toggle_application_feature()
+        {
+            var application = new Application("App01", "0.1");
+            var feature = new Feature("isButtonGreen", false);
+
+            await AddEntity(application, feature);
+
+            var newFeature = await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.AddApplicationFeature(new ApplicationFeatureModel("App01", "0.1", "isButtonGreen", true));
+            });
+
+            await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.ToggleApplicationFeature(new ApplicationFeatureModel("App01", "0.1", "isButtonGreen", false));
+            });
+
+            var persistedEntity = await ExecuteCommand((contexto) =>
+            {
+                var featureRepository = new ApplicationFeatureRepository(contexto);
+                return featureRepository.GetAsync(newFeature.Id);
+            });
+
+            using (new AssertionScope())
+            {
+                persistedEntity.ApplicationId.Should().Be(application.Id);
+                persistedEntity.FeatureId.Should().Be(feature.Id);
+                persistedEntity.IsActive.Should().BeFalse();
+            }
+        }
+
+        [Fact]
+        public async Task Should_check_application_feature()
+        {
+            var application = new Application("App01", "0.1");
+            var feature = new Feature("isButtonGreen", false);
+
+            await AddEntity(application, feature);
+
+            var newFeature = await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.AddApplicationFeature(new ApplicationFeatureModel("App01", "0.1", "isButtonGreen", true));
+            });
+
+            var featureCheck = await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.Check("App01", "0.1", "isButtonGreen");
+            });
+
+            using (new AssertionScope())
+            {
+                featureCheck.Enabled.Should().BeTrue();
+                featureCheck.Mesage.Should().Be(DomainMessage.FeatureEnabled);
+            }
+        }
+
+        [Fact]
+        public async Task Should_check_feature()
+        {
+            var feature = new Feature("isButtonGreen", true);
+            await AddEntity(feature);
+
+            var featureCheck = await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.Check("App01", "0.1", "isButtonGreen");
+            });
+
+            using (new AssertionScope())
+            {
+                featureCheck.Enabled.Should().BeTrue();
+                featureCheck.Mesage.Should().Be(DomainMessage.FeatureEnabled);
             }
         }
 
@@ -54,8 +166,15 @@ namespace Lab.Toggler.Tests.Integration.ApplicationService
                 return featureAppService.AddApplicationFeature(new ApplicationFeatureModel("App01", "0.1", "isButtonGreen", true));
             });
 
+            var persistedEntity = await ExecuteCommand((contexto) =>
+            {
+                var featureRepository = new ApplicationFeatureRepository(contexto);
+                return featureRepository.GetAsync(newFeature.Id);
+            });
+
             using (new AssertionScope())
             {
+                persistedEntity.Should().NotBeNull();
                 newFeature.ApplicationName.Should().Be("App01");
                 newFeature.ApplicationVersion.Should().Be("0.1");
                 newFeature.FeatureName.Should().Be("isButtonGreen");

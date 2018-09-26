@@ -12,7 +12,10 @@ namespace Lab.Toggler.Domain.Service
         private readonly IApplicationFeatureRepository _applicationFeatureRepository;
         private readonly IFeatureRepository _featureRepository;
 
-        public ApplicationFeatureDomainService(IMediator mediator, IApplicationFeatureRepository applicationFeatureRepository, IFeatureRepository featureRepository) : base(mediator)
+        public ApplicationFeatureDomainService(
+            IMediator mediator, 
+            IApplicationFeatureRepository applicationFeatureRepository, 
+            IFeatureRepository featureRepository) : base(mediator)
         {
             _applicationFeatureRepository = applicationFeatureRepository;
             _featureRepository = featureRepository;

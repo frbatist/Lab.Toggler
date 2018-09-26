@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab.Toggler.ApplicationService
 {
-    public class ApplicationAppService : ApplicationBase
+    public class ApplicationAppService : ApplicationBase, IApplicationAppService
     {
         private readonly IApplicationDomainService _applicationDomainService;
 
@@ -21,6 +21,7 @@ namespace Lab.Toggler.ApplicationService
             var application = await _applicationDomainService.Add(dto);
             if (application == null)
                 return null;
+            await CommitAsync();
             return new ApplicationResponseModel
             {
                 Id = application.Id,

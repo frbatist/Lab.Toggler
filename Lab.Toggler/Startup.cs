@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
+using System.IO;
+using System;
 
 namespace Lab.Toggler
 {
@@ -26,6 +30,7 @@ namespace Lab.Toggler
             services.RegisterServices();
 
             services.AddMvcCore()
+                .AddApiExplorer()
                 .AddAuthorization(options =>
                 {
                     options.AddPolicy("admin", builder =>
@@ -37,17 +42,28 @@ namespace Lab.Toggler
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAuthentication("Bearer")
-            .AddIdentityServerAuthentication(options =>
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:5000";
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = "Toggler.Api";
+                });
+
+            services.AddSwaggerGen(c =>
             {
-                options.Authority = "http://localhost:5000";
-                options.RequireHttpsMetadata = false;
-
-                options.ApiName = "Toggler.Api";
+                c.SwaggerDoc("v1",
+                    new Info
+                    {
+                        Title = "Feature Toggler",
+                        Version = "v1",
+                        Description = "REST API for feature toggle management.",
+                    });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -55,7 +71,12 @@ namespace Lab.Toggler
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Feature Toggler API V1");
+            });
 
             app.UseMvc();
         }

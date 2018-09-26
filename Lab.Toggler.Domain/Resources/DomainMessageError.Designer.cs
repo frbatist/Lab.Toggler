@@ -115,6 +115,15 @@ namespace Lab.Toggler.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nonexisting Application..
+        /// </summary>
+        public static string NonExistentApplication {
+            get {
+                return ResourceManager.GetString("NonExistentApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nonexisting Feature..
         /// </summary>
         public static string NonExistentFeature {

@@ -1,5 +1,4 @@
-﻿using Lab.Toggler.Domain.Service;
-using MediatR;
+﻿using Lab.Toggler.Domain.Interface.Notifications;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -7,16 +6,16 @@ namespace Lab.Toggler.Controllers
 {
     public class ApiControllerBase : ControllerBase
     {
-        private readonly IErrorNotificationHandler _notificationHandler;
+        private readonly IErrorNotificationsManager _errorNotificationsManager;
 
-        public ApiControllerBase(INotificationHandler<ErrorNotification> notificationHandler)
+        public ApiControllerBase(IErrorNotificationsManager errorNotificationsManager)
         {
-            _notificationHandler = (IErrorNotificationHandler)notificationHandler;
+            _errorNotificationsManager = errorNotificationsManager;
         }
 
         protected bool IsValidOperation()
         {
-            return (!_notificationHandler.HasNotifications());
+            return (!_errorNotificationsManager.HasNotifications());
         }
 
         protected new IActionResult Response(object result = null)
@@ -26,7 +25,7 @@ namespace Lab.Toggler.Controllers
                 return Ok(result);
             }
 
-            return BadRequest(_notificationHandler.GetNotifications().Select(n => n.Error));
+            return BadRequest(_errorNotificationsManager.GetNotifications().Select(n => n.Error));
         }
     }
 }
