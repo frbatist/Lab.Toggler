@@ -1,7 +1,6 @@
 ﻿using Lab.Toggler.Domain.DTO;
 using Lab.Toggler.Domain.Interface.Data;
 using Lab.Toggler.Domain.Interface.Data.Repository;
-using Lab.Toggler.Domain.Interface.MessageBus;
 using Lab.Toggler.Domain.Service;
 using Lab.Toggler.Model;
 using System.Threading.Tasks;
@@ -14,20 +13,17 @@ namespace Lab.Toggler.ApplicationService
         private readonly IFeatureRepository _featureRepositoriy;
         private readonly IFeatureDomainService _featureDomainService;
         private readonly IApplicationFeatureDomainService _applicationFeatureDomainService;
-        private readonly IMessageBus _messageBus;
         public FeatureAppService(
             IUnitOfWork unitOfWork, 
             IApplicationRepository applicationRepository,
             IFeatureRepository featureRepository, 
             IFeatureDomainService featureDomainService,
-            IApplicationFeatureDomainService applicationFeatureDomainService,
-            IMessageBus messageBus) : base(unitOfWork)
+            IApplicationFeatureDomainService applicationFeatureDomainService) : base(unitOfWork)
         {
             _applicationRepository = applicationRepository;
             _featureRepositoriy = featureRepository;
             _featureDomainService = featureDomainService;
             _applicationFeatureDomainService = applicationFeatureDomainService;
-            _messageBus = messageBus;
         }
 
         public async Task<FeatureModelResponse> Add(FeatureModel featureModel)
@@ -35,8 +31,7 @@ namespace Lab.Toggler.ApplicationService
             var newFeature = await _featureDomainService.AddFeature(new FeatureDTO(featureModel.Name, featureModel.IsActive));
             if (newFeature == null)
                 return null;
-            await CommitAsync();
-            await _messageBus.Publish(featureModel);
+            await CommitAsync();            
             return new FeatureModelResponse(newFeature.Id, newFeature.Name, newFeature.IsActive);
         }
 

@@ -7,6 +7,6 @@ namespace Lab.Toggler.Domain.Interface.MessageBus
 {
     public interface IMessageBus
     {
-        Task Publish<T>(T message) where T : class;
+        Task Publish<T>(T message, string exchange) where T : class;
     }
 }

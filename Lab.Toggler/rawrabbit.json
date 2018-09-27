@@ -1,9 +1,9 @@
 {
-  "Username": "guest",
-  "Password": "guest",
-  "VirtualHost": "/",
-  "Port": 5672,
-  "Hostnames": [ "localhost" ],
+  "Username": "fxjizwph",
+  "Password": "L-NF87CiBx8qRTFzaAvEOKjnFiW6PTjd",
+  "VirtualHost": "fxjizwph",
+  "Port": 8883,
+  "Hostnames": [ "clam.rmq.cloudamqp.com" ],
   "RequestTimeout": "00:00:10",
   "PublishConfirmTimeout": "00:01:00",
   "RecoveryInterval": "00:00:10",
@@ -16,6 +16,7 @@
     "AutoDelete": true,
     "Type": "Topic"
   },
+  ""
   "Queue": {
     "AutoDelete": true,
     "Durable": true,

@@ -15,13 +15,17 @@ namespace Lab.Toggler.Infra.Bus
             _bus = bus;
         }
 
-        public async Task Publish<T>(T message) where T:class
-        {            
-            
+        public async Task Publish<T>(T message, string exchange) where T:class
+        {
+            string exchangeName = typeof(T).Name;
+            if (!string.IsNullOrWhiteSpace(exchange))
+            {
+                exchange += $"_{exchange}";
+            }
             await _bus.PublishAsync(message, Guid.NewGuid(), (IPublishConfigurationBuilder config) => 
             {
                 config
-                .WithExchange(d => d.WithName(typeof(T).Name))
+                .WithExchange(d => d.WithName(exchangeName))
                 .WithRoutingKey("#");
             });
         }
