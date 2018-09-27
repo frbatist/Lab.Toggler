@@ -20,7 +20,7 @@
         /// <summary>
         /// Indicate if it's active
         /// </summary>
-        public bool IsActive { get; protected set; }
+        public bool IsActive { get; set; }
 
         public ApplicationFeatureModel(string applicationName, string applicationVersion, string featureName, bool isActive)
         {
