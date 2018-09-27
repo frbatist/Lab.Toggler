@@ -52,7 +52,7 @@ The api uses OAuth2, currently ther's no configuration, so there's a pre defined
 
 # TODO
 
-- Add integration by message queue, I'ts iniciated, but, not concluded;
+- Add integration by message queue, I'ts initiated, but, not concluded;
 - Users and application client dynamic configuration for Identity server.
 - Docker file and docker compose;
 - NoSql implementation of the repository pattern.
