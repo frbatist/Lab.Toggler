@@ -4,6 +4,7 @@ using Lab.Toggler.Domain.Entities;
 using Lab.Toggler.Infra.Data.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -96,6 +97,32 @@ namespace Lab.Toggler.Tests.Integration
                 persistedEntity.ApplicationId.Should().Be(application2.Id);
                 persistedEntity.FeatureId.Should().Be(feature.Id);
                 persistedEntity.IsActive.Should().Be(true);
+            }
+        }
+
+        [Fact]
+        public async Task Should_get_all_application_feature_by_application_and_feature()
+        {
+            var feature = new Feature("Feature01", false);
+            var feature2 = new Feature("Feature02", false);
+            var application1 = new Application("Sales", "1.1");
+            var applicationFeature1 = new ApplicationFeature(feature, application1, false);
+            var applicationFeature2 = new ApplicationFeature(feature2, application1, false);
+
+
+            await AddEntity(feature, feature2, application1, applicationFeature1, applicationFeature2);
+
+            var persistedEntities = await ExecuteCommand((contexto) =>
+            {
+                var featureRepository = new ApplicationFeatureRepository(contexto);
+                return featureRepository.GetAllAsync("Sales", "1.1");
+            });
+
+            using (new AssertionScope())
+            {
+                persistedEntities.Should().NotBeNull();
+                persistedEntities.Should().HaveCount(2);
+                persistedEntities.FirstOrDefault(d => d.Id.Equals(feature.Id)).Name.Should().Be("Feature01");
             }
         }
 

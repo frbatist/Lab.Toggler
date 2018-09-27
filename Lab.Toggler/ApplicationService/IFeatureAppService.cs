@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Lab.Toggler.Model;
 
 namespace Lab.Toggler.ApplicationService
@@ -10,5 +11,6 @@ namespace Lab.Toggler.ApplicationService
         Task ToggleApplicationFeature(ApplicationFeatureModel applicationFeatureModel);
         Task ToggleFeature(FeatureModel featureModel);
         Task<FeatureCheckModelResponse> Check(string application, string version, string featureName);
+        Task<IEnumerable<FeatureModelResponse>> GetAll(string application, string version);
     }
 }

@@ -3,27 +3,33 @@ using Lab.Toggler.Domain.Interface.Data;
 using Lab.Toggler.Domain.Interface.Data.Repository;
 using Lab.Toggler.Domain.Service;
 using Lab.Toggler.Model;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lab.Toggler.ApplicationService
 {
     public class FeatureAppService : ApplicationBase, IFeatureAppService
     {
-        private readonly IApplicationRepository _applicationRepository;
+        private readonly IApplicationRepository _applicationRepository;        
         private readonly IFeatureRepository _featureRepositoriy;
         private readonly IFeatureDomainService _featureDomainService;
         private readonly IApplicationFeatureDomainService _applicationFeatureDomainService;
+        private readonly IApplicationFeatureRepository _applicationFeatureRepository;
+
         public FeatureAppService(
             IUnitOfWork unitOfWork, 
             IApplicationRepository applicationRepository,
             IFeatureRepository featureRepository, 
             IFeatureDomainService featureDomainService,
-            IApplicationFeatureDomainService applicationFeatureDomainService) : base(unitOfWork)
+            IApplicationFeatureDomainService applicationFeatureDomainService,
+            IApplicationFeatureRepository applicationFeatureRepository) : base(unitOfWork)
         {
             _applicationRepository = applicationRepository;
             _featureRepositoriy = featureRepository;
             _featureDomainService = featureDomainService;
             _applicationFeatureDomainService = applicationFeatureDomainService;
+            _applicationFeatureRepository = applicationFeatureRepository;
         }
 
         public async Task<FeatureModelResponse> Add(FeatureModel featureModel)
@@ -71,6 +77,12 @@ namespace Lab.Toggler.ApplicationService
                 Enabled = check.Enabled,
                 Mesage = check.Mesage
             };
+        }
+
+        public async Task<IEnumerable<FeatureModelResponse>> GetAll(string application, string version)
+        {
+            var features = await _applicationFeatureRepository.GetAllAsync(application, version);
+            return features.Select(d => new FeatureModelResponse(d.Id, d.Name, d.IsActive));
         }
     }
 }

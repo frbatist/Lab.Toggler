@@ -10,6 +10,7 @@ using Lab.Toggler.Infra.Data.Repository;
 using Lab.Toggler.Model;
 using MediatR;
 using NSubstitute;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -154,6 +155,31 @@ namespace Lab.Toggler.Tests.Integration.ApplicationService
         }
 
         [Fact]
+        public async Task Should_get_all_application_feature()
+        {
+            var feature = new Feature("Feature01", false);
+            var feature2 = new Feature("Feature02", false);
+            var application1 = new Application("Sales", "1.1");
+            var applicationFeature1 = new ApplicationFeature(feature, application1, false);
+            var applicationFeature2 = new ApplicationFeature(feature2, application1, false);
+
+            await AddEntity(feature, feature2, application1, applicationFeature1, applicationFeature2);
+
+            var featureCheck = await ExecuteCommand((context) =>
+            {
+                FeatureAppService featureAppService = GetFeatureAppService(context);
+                return featureAppService.GetAll("Sales", "1.1");
+            });
+
+            using (new AssertionScope())
+            {
+                featureCheck.Should().NotBeNull();
+                featureCheck.Should().HaveCount(2);
+                featureCheck.FirstOrDefault(d => d.Id.Equals(feature.Id)).Name.Should().Be("Feature01");
+            }
+        }
+
+        [Fact]
         public async Task Should_add_new_application_feature()
         {
             var application = new Application("App01", "0.1");
@@ -222,13 +248,13 @@ namespace Lab.Toggler.Tests.Integration.ApplicationService
         private FeatureAppService GetFeatureAppService(TogglerContext context)
         {
             var featureRepository = new FeatureRepository(context);
-            var applicationRepository = new ApplicationRepository(context);
             var applicationFeatureRepository = new ApplicationFeatureRepository(context);
+            var applicationRepository = new ApplicationRepository(context);            
             var uow = new UnitOfWork(context);
             var featureDomainService = new FeatureDomainService(_mediator, featureRepository);
             var applicationFeatureDomainService = new ApplicationFeatureDomainService(_mediator, applicationFeatureRepository, featureRepository);
 
-            var featureAppService = new FeatureAppService(uow, applicationRepository, featureRepository, featureDomainService, applicationFeatureDomainService);
+            var featureAppService = new FeatureAppService(uow, applicationRepository, featureRepository, featureDomainService, applicationFeatureDomainService, applicationFeatureRepository);
             return featureAppService;
         }
     }

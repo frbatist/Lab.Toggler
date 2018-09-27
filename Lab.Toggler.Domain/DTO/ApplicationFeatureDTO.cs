@@ -20,6 +20,6 @@ namespace Lab.Toggler.Domain.DTO
         {
             ValidationResult = new ApplicationFeatureDtoValidation().Validate(this);
             return ValidationResult.IsValid;            
-        }
+        }    
     }
 }

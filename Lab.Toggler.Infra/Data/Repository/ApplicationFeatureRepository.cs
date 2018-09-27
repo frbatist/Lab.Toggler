@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Lab.Toggler.Domain.DTO;
 using Lab.Toggler.Domain.Entities;
 using Lab.Toggler.Domain.Interface.Data.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,14 @@ namespace Lab.Toggler.Infra.Data.Repository
         {
             var query = GetAll().Where(d=>d.Application.Name.Equals(application) && d.Application.Version.Equals(version) && d.Feature.Name.Equals(featureName));
             return query.FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<FeatureDTO>> GetAllAsync(string application, string version)
+        {
+            var query = GetAll().Where(d => d.Application.Name.Equals(application) && d.Application.Version.Equals(version))
+                .Select(e=> new FeatureDTO(e.FeatureId, e.Feature.Name, e.IsActive));
+            var values = await query.ToListAsync();
+            return values;
         }
     }
 }

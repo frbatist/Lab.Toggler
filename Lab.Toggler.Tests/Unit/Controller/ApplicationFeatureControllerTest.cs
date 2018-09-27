@@ -82,5 +82,39 @@ namespace Lab.Toggler.Tests.Unit.Controller
             var applicationResponseModel = okResult.Value.Should().BeAssignableTo<FeatureCheckModelResponse>().Subject;
             contract.Should().BeEquivalentTo(applicationResponseModel);
         }
+
+        [Fact]
+        public async Task Should_get_all_application_feature_data()
+        {
+            var contract01 = new FeatureModelResponseContract
+            {
+                Id = 1,
+                Name = "feature01",
+                IsActive = true
+            };
+            var contract02 = new FeatureModelResponseContract
+            {
+                Id = 2,
+                Name = "feature02",
+                IsActive = false
+            };
+            var contract = new List<FeatureModelResponseContract>
+            {
+                contract01, contract02
+            };
+
+            var model01 = new FeatureModelResponse(1, "feature01", true);
+            var model02 = new FeatureModelResponse(2, "feature02", false);
+
+            _featureAppService.GetAll("App01", "0.1")
+                .Returns(new List<FeatureModelResponse> { model01, model02 });
+
+            var response = await _applicationFeatureController.Get("App01", "0.1");
+
+            response.Should().NotBeNull();
+            var okResult = response.Should().BeOfType<OkObjectResult>().Subject;
+            var applicationResponseModel = okResult.Value.Should().BeAssignableTo<IList<FeatureModelResponse>>().Subject;
+            contract.Should().BeEquivalentTo(applicationResponseModel);
+        }
     }
 }

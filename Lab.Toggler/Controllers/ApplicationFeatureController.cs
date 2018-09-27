@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lab.Toggler.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/application-feature")]
     [ApiController]
     [Authorize]
     public class ApplicationFeatureController : ApiControllerBase
@@ -74,6 +74,28 @@ namespace Lab.Toggler.Controllers
             try
             {
                 var response = await _featureAppService.Check(featureCheckModel.ApplicationName, featureCheckModel.ApplicationVersion, featureCheckModel.Feature);
+                return Response(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); ;
+            }
+        }
+
+        /// <summary>
+        /// Endpoint to get all feature data for a application
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="version"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("all")]
+        [ProducesResponseType(typeof(FeatureModelResponse), 200)]
+        public async Task<IActionResult> Get(string application, string version)
+        {
+            try
+            {
+                var response = await _featureAppService.GetAll(application, version);
                 return Response(response);
             }
             catch (Exception ex)
