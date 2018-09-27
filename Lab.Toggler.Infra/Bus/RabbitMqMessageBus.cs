@@ -1,9 +1,7 @@
 ﻿using Lab.Toggler.Domain.Interface.MessageBus;
 using RawRabbit;
-using RawRabbit.Configuration;
+using RawRabbit.Configuration.Publish;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab.Toggler.Infra.Bus
@@ -18,8 +16,14 @@ namespace Lab.Toggler.Infra.Bus
         }
 
         public async Task Publish<T>(T message) where T:class
-        {
-            await _bus.PublishAsync(message);
+        {            
+            
+            await _bus.PublishAsync(message, Guid.NewGuid(), (IPublishConfigurationBuilder config) => 
+            {
+                config
+                .WithExchange(d => d.WithName(typeof(T).Name))
+                .WithRoutingKey("#");
+            });
         }
     }
 }
