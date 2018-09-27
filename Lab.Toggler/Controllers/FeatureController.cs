@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Lab.Toggler.ApplicationService;
 using Lab.Toggler.Domain.Interface.Notifications;
 using Lab.Toggler.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace Lab.Toggler.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class FeatureController : ApiControllerBase
     {
         private readonly IFeatureAppService _featureAppService;

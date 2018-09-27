@@ -2,6 +2,7 @@
 using FluentAssertions.Execution;
 using Lab.Toggler.ApplicationService;
 using Lab.Toggler.Domain.Entities;
+using Lab.Toggler.Domain.Interface.MessageBus;
 using Lab.Toggler.Domain.Resources;
 using Lab.Toggler.Domain.Service;
 using Lab.Toggler.Infra.Data;

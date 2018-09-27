@@ -13,7 +13,7 @@ namespace Lab.Toggler.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin")]    
+    [Authorize(Roles = "admin")]
     public class ApplicationController : ApiControllerBase
     {
         private readonly IApplicationAppService _applicationAppService;
@@ -27,7 +27,7 @@ namespace Lab.Toggler.Controllers
         /// Endpoint to add a new application for feature management
         /// </summary>
         /// <param name="model">Application data</param>
-        /// <returns></returns>
+        /// <returns></returns>        
         [HttpPost]
         [ProducesResponseType(typeof(ApplicationResponseModel), 200)]
         public async Task<IActionResult> Post(ApplicationModel model)
